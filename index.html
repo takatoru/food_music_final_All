@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>食と音楽のマッチングシステム</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>🍴 食と音楽のマッチングシステム 🎵</h1>
+
+    <div class="section">
+      <label for="food">料理を選択：</label>
+      <select id="food">
+        <option value="">-- 選択してください --</option>
+      </select>
+    </div>
+
+    <div class="section" id="taste-section" style="display:none;">
+      <label for="taste">感じたい味覚：</label>
+      <select id="taste">
+        <option value="">-- 選択してください --</option>
+      </select>
+    </div>
+
+    <div class="section">
+      <label for="mood">気分：</label>
+      <select id="mood">
+        <option value="">-- 選択してください --</option>
+        <option value="relaxation">リラックス</option>
+        <option value="excitement">元気</option>
+        <option value="focus">集中</option>
+        <option value="calm">落ち着き</option>
+      </select>
+    </div>
+
+    <button id="playBtn">🎵 音楽を再生</button>
+
+    <div class="volume-control-container" style="margin-top: 20px; text-align: left;">
+      <label for="volumeSlider">🔊 音量調整：</label>
+      <input type="range" id="volumeSlider" min="0" max="100" value="50" style="width: 100%;">
+      
+      <div style="text-align: right;">
+        <span id="volValue" style="font-weight: bold;">50%</span>
+      </div>
+    </div>
+    <div id="player-container">
+      <div id="youtubePlayer" class="player-element"></div>
+      <audio id="audioPlayer" controls class="player-element"></audio>
+    </div>
+
+  </div>
+
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="script.js"></script>
+</body>
+</html>

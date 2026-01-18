@@ -1,0 +1,190 @@
+/* === 全体設定 === */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Hiragino Sans", "Noto Sans JP", sans-serif;
+  background-color: #fafafa;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* === コンテナ === */
+.container {
+  width: 90%;
+  max-width: 600px;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin: 0;
+}
+
+/* === タイトル === */
+h1 {
+  color: #2c3e50;
+  font-size: 1.8em;
+  margin-bottom: 30px;
+}
+
+/* === 各セクション === */
+.section {
+  margin: 20px 0;
+  text-align: left;
+}
+
+/* === ラベル === */
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #555;
+}
+
+/* === プルダウンメニュー === */
+select {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  outline: none;
+  transition: border 0.3s ease;
+}
+
+select:focus {
+  border-color: #5e81ac;
+}
+
+/* === ボタン === */
+button {
+  background-color: #5e81ac;
+  color: white;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  margin-top: 20px;
+}
+
+button:hover {
+  background-color: #4c6a91;
+}
+
+/* === 🔽 プレイヤー部分の変更 🔽 === */
+
+/* プレイヤー全体を囲うコンテナ */
+#player-container {
+  margin-top: 30px;
+  width: 100%;
+  /* 16:9 のアスペクト比を維持（padding-top トリック） */
+  position: relative;
+  padding-top: 56.25%; /* ( 9 / 16 ) * 100% */
+  background-color: #000; /* 読み込み中の背景 */
+  border-radius: 10px;
+  overflow: hidden; /* 角丸を効かせるため */
+}
+
+/* audio と YouTube(iframe) 共通のスタイル 
+  コンテナいっぱいに広げる
+*/
+.player-element,
+#youtubePlayer iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+}
+
+/* 初期状態では両方非表示にしておき、
+  再生する方だけを script.js で display: block; に切り替える
+*/
+#audioPlayer,
+#youtubePlayer {
+  display: none;
+}
+
+/* 🔼 プレイヤー部分の変更 🔼 === */
+
+
+/* === スマホ対応 === */
+@media (max-width: 480px) {
+  .container {
+    width: 95%;
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 1.4em;
+  }
+
+  button {
+    width: 100%;
+  }
+}
+
+/* === 🔽 通知メッセージ（トースト）のスタイル 🔽 === */
+.toast-message {
+  position: fixed;
+  top: 20px;
+  right: 20px; /* スマホで見やすくするなら left: 50%; transform: translateX(-50%); に変更可 */
+  background-color: #2c3e50; /* 濃いネイビーで上品に */
+  color: #fff;
+  padding: 15px 25px;
+  border-radius: 50px; /* 丸みをつけて優しく */
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  font-size: 14px;
+  font-weight: bold;
+  z-index: 9999;
+  opacity: 0;
+  animation: fadeInOut 5s forwards; /* 5秒かけて表示→消滅 */
+}
+
+/* ふわっと出て消えるアニメーション */
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(-20px); }
+  10% { opacity: 1; transform: translateY(0); }
+  80% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-20px); }
+}
+
+/* === 🔽 音量スライダーのデザイン（色付けに必須） 🔽 === */
+input[type=range] {
+  -webkit-appearance: none; /* 重要：標準の見た目を消す */
+  width: 100%;
+  height: 8px; /* バーの太さ */
+  border-radius: 5px;
+  background: #d3d3d3; /* デフォルトの色（グレー） */
+  outline: none;
+  cursor: pointer;
+  margin: 10px 0;
+}
+
+/* つまみ（丸い部分）のデザイン */
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #5e81ac; /* つまみの色（青） */
+  border: 2px solid #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+input[type=range]::-webkit-slider-thumb:hover {
+  transform: scale(1.2); /* ホバー時に少し大きく */
+}
